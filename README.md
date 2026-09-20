@@ -95,7 +95,7 @@ Members can access shared boards and collaborate on tasks in real time.
 
 ## Architecture
 
-'
+```text
                     FlowForge
                         │
         ┌───────────────┴───────────────┐
@@ -118,7 +118,11 @@ Members can access shared boards and collaborate on tasks in real time.
         │                               ▼
         └──────────────────────────► MySQL
 
+```
+
 Project Structure:
+
+```text
 FlowForge
 │
 ├── src
@@ -142,6 +146,8 @@ FlowForge
 ├── schema.sql
 ├── .gitignore
 └── README.md
+
+```
 
 Database:
 FlowForge uses MySQL for persistent storage.
@@ -196,6 +202,7 @@ Real-Time WebSocket Flow
 
 FlowForge uses a WebSocket connection to synchronize changes between connected users.
 
+```text
 User A
    │
    │ Create / Edit / Move Task
@@ -211,6 +218,9 @@ User A              User B
 Browser             Browser
    │                     │
    └─────── Updated ─────┘
+
+
+```
 
 This allows collaborators to see task changes without manually refreshing the page.
 
@@ -245,23 +255,23 @@ Screenshots
 
 #Screenshots of the FlowForge interface :
 
-#User Authentication — Sign In
+User Authentication — Sign In
 <img width="959" height="440" alt="Screenshot 2026-09-20 200010" src="https://github.com/user-attachments/assets/62f5ba2f-fe09-4bf7-9aad-5dfebb4f6372" />
 
-#Empty Workspace / Dashboard
+Empty Workspace / Dashboard
 <img width="484" height="435" alt="Screenshot 2026-09-20 200252" src="https://github.com/user-attachments/assets/2ec79df2-253c-4ae7-b8a4-a136e5fea726" />
 
-#AutoFlow with Prioritized Tasks
+AutoFlow with Prioritized Tasks
 <img width="577" height="357" alt="Screenshot 2026-09-20 201205" src="https://github.com/user-attachments/assets/04823b6c-b4bd-40e2-8f62-71fe0ab2e5d0" />
 
-#Kanban Board with Tasks & Dependencies
+Kanban Board with Tasks & Dependencies
 <img width="569" height="257" alt="Screenshot 2026-09-20 201217" src="https://github.com/user-attachments/assets/2325e2b8-cfa3-4173-b17b-406148083ab7" />
 
-#Completed Task + AutoFlow Recalculation
+Completed Task + AutoFlow Recalculation
 <img width="574" height="426" alt="Screenshot 2026-09-20 201237" src="https://github.com/user-attachments/assets/d93391e1-ad42-447e-8ae9-34349191e5cc" />
 
 
-#Project Goals:
+Project Goals:
 The project was built to demonstrate practical implementation of:
 
 Spring Boot backend development
@@ -273,5 +283,5 @@ Collaborative application design
 JPA/Hibernate persistence
 Vanilla JavaScript frontend development
 
-#License:
+License:
 This project is currently intended as a personal academic and portfolio project.
