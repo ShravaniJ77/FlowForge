@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FlowForge — Workspace</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.2.0/bundles/stomp.umd.min.js"></script>
+</head>
+
+<body>
+
+<div class="page-shell">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="topbar">
+
+        <a class="brand" href="/index.html">
+            <span class="brand-mark">F</span>
+
+            <span class="brand-text">
+                <strong>FlowForge</strong>
+                <small>Collaborative workspace</small>
+            </span>
+        </a>
+
+        <div class="topbar-actions">
+            <button
+                id="newTask"
+                class="primary-button"
+                type="button"
+            >
+                <span>+</span>
+                New task
+            </button>
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main>
+
+        <!-- Workspace controls -->
+        <section
+            id="flowforgeBoardControls"
+            class="workspace-shell"
+        >
+            <div class="workspace-bar">
+
+                <div class="workspace-left">
+
+                    <div class="workspace-label">
+                        WORKSPACE
+                    </div>
+
+                    <div class="workspace-selector-wrap">
+
+                        <select
+                            id="boardSelect"
+                            class="workspace-select"
+                        ></select>
+
+                        <span class="select-chevron">
+                            ▾
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="createBoardButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        <span>+</span>
+                        Board
+                    </button>
+
+                </div>
+
+
+               <div class="workspace-right">
+    <button id="membersButton" class="ghost-button" type="button">
+        Members
+    </button>
+
+    <button
+        id="deleteBoardButton"
+        class="ghost-button"
+        type="button"
+        style="display: none;"
+    >
+        Delete board
+    </button>
+
+    <button id="logoutButton" class="ghost-button" type="button">
+        Logout
+    </button>
+</div>
+
+            </div>
+
+
+            <!-- Members dropdown -->
+            <div
+                id="membersPanel"
+                class="members-panel hidden"
+            ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="hero">
+
+            <div class="hero-copy">
+
+                <div class="eyebrow">
+                    COLLABORATIVE TASK MANAGEMENT
+                </div>
+
+                <h1 id="boardName">
+                    FlowForge
+                </h1>
+
+                <p
+                    id="heroSubtitle"
+                    class="hero-subtitle"
+                >
+                    Plan, prioritize, and move work forward.
+                </p>
+
+            </div>
+
+
+            <div class="hero-side">
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        TOTAL
+                    </span>
+
+                    <strong id="total">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        ACTIVE
+                    </span>
+
+                    <strong id="active">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        DONE
+                    </span>
+
+                    <strong id="done">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AUTOFLOW
+             ================================================= -->
+
+        <section class="autoflow-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <div class="eyebrow">
+                        INTELLIGENT PRIORITIZATION
+                    </div>
+
+                    <h2>
+                        AutoFlow
+                    </h2>
+
+                    <p>
+                        Your next best action, calculated from
+                        priority, deadline, effort and dependencies.
+                    </p>
+                </div>
+
+                <button
+                    id="autoflowRefresh"
+                    class="ghost-button"
+                    type="button"
+                >
+                    Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="autoflowResult"
+                class="autoflow-result"
+            >
+                <div class="autoflow-loading">
+                    Analyzing your board…
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BOARD
+             ================================================= -->
+
+        <section class="board-section">
+
+            <div class="board-heading">
+
+                <div>
+                    <div class="eyebrow">
+                        WORKFLOW
+                    </div>
+
+                    <h2>
+                        Task board
+                    </h2>
+                </div>
+
+                <div class="drag-hint">
+                    Drag tasks between columns
+                </div>
+
+            </div>
+
+
+            <div
+                id="board"
+                class="kanban-board"
+            ></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     TASK MODAL
+     ========================================================= -->
+
+<div
+    id="modal"
+    class="modal"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+                <div class="eyebrow">
+                    TASK
+                </div>
+
+                <h2 id="modalTitle">
+                    Create task
+                </h2>
+            </div>
+
+            <button
+                id="close"
+                class="modal-close"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="taskForm">
+
+            <input
+                id="editTaskId"
+                type="hidden"
+            >
+
+
+            <div class="form-group">
+
+                <label for="title">
+                    Title
+                </label>
+
+                <input
+                    id="title"
+                    type="text"
+                    placeholder="What needs to be done?"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    rows="4"
+                    placeholder="Add some context..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="priority">
+                        Priority
+                    </label>
+
+                    <select id="priority">
+
+                        <option value="LOW">
+                            Low
+                        </option>
+
+                        <option
+                            value="MEDIUM"
+                            selected
+                        >
+                            Medium
+                        </option>
+
+                        <option value="HIGH">
+                            High
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="status">
+                        Status
+                    </label>
+
+                    <select id="status">
+
+                        <option value="TODO">
+                            To Do
+                        </option>
+
+                        <option value="IN_PROGRESS">
+                            In Progress
+                        </option>
+
+                        <option value="DONE">
+                            Done
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="dueDate">
+                        Due date
+                    </label>
+
+                    <input
+                        id="dueDate"
+                        type="date"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="estimatedMinutes">
+                        Estimated minutes
+                    </label>
+
+                    <input
+                        id="estimatedMinutes"
+                        type="number"
+                        min="1"
+                        placeholder="60"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="dependsOn">
+                    Depends on
+                </label>
+
+                <select id="dependsOn">
+
+                    <option value="">
+                        No dependency
+                    </option>
+
+                </select>
+
+                <small class="form-help">
+                    A task with an incomplete dependency cannot be
+                    moved to Done.
+                </small>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="ghost-button"
+                    id="cancelTaskButton"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    id="submitTask"
+                >
+                    Create task
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CREATE BOARD MODAL
+     ========================================================= -->
+
+<div
+    id="boardModal"
+    class="modal"
+>
+
+    <div class="modal-card small-modal">
+
+        <div class="modal-header">
+
+            <div>
+                <div class="eyebrow">
+                    WORKSPACE
+                </div>
+
+                <h2>
+                    Create a board
+                </h2>
+            </div>
+
+            <button
+                id="closeBoardModal"
+                class="modal-close"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="boardForm">
+
+            <div class="form-group">
+
+                <label for="boardNameInput">
+                    Board name
+                </label>
+
+                <input
+                    id="boardNameInput"
+                    type="text"
+                    placeholder="e.g. Placement Prep"
+                    maxlength="80"
+                    required
+                >
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelBoardButton"
+                    class="ghost-button"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Create board
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="/app.js"></script>
+
+</body>
+</html>

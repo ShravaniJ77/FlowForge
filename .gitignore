@@ -1,0 +1,23 @@
+target/
+
+.idea/
+
+.vscode/
+
+*.iml
+
+application-local.properties
+
+.env
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+
+bin/

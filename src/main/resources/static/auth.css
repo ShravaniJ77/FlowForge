@@ -1,0 +1,610 @@
+/* =========================================================
+   FLOWFORGE AUTH
+   Matches the main Kanban / Dashboard visual system
+========================================================= */
+
+:root {
+    --bg: #f4f1ea;
+    --ink: #20231f;
+    --muted: #74766f;
+    --card: #fffdf8;
+    --line: #dfdbd0;
+    --column: #ebe8df;
+    --accent: #d8ff64;
+
+    --danger: #e76f51;
+    --success: #5d8c45;
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: var(--bg);
+    color: var(--ink);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.auth-shell {
+    width: min(100%, 470px);
+
+    position: relative;
+}
+
+
+/* =========================
+   BRAND
+========================= */
+
+.auth-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+}
+
+.brand-mark {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 11px;
+
+    background: var(--ink);
+    color: var(--accent);
+
+    display: grid;
+    place-items: center;
+
+    font-weight: 900;
+    font-size: 18px;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.auth-brand h1 {
+    margin: 0;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.auth-brand p {
+    margin: 2px 0 0;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+
+    color: var(--muted);
+}
+
+
+/* =========================
+   AUTH CARD
+========================= */
+
+.auth-card {
+    width: 100%;
+
+    background: var(--card);
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 21px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.auth-header {
+    margin-bottom: 27px;
+}
+
+.eyebrow {
+    display: block;
+
+    margin: 0 0 10px;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 900;
+
+    color: #85877e;
+}
+
+.auth-header h2 {
+    margin:
+        0 0 12px;
+
+    font-size: 35px;
+
+    line-height: 0.98;
+
+    letter-spacing: -2px;
+
+    font-weight: 850;
+}
+
+.auth-header p {
+    margin: 0;
+
+    max-width: 380px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+#loginForm,
+#registerForm {
+    width: 100%;
+}
+
+
+/* =========================
+   FIELD
+========================= */
+
+.field {
+    margin:
+        16px 0;
+}
+
+.field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+.field input {
+    width: 100%;
+
+    height: 45px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 10px;
+
+    padding:
+        12px;
+
+    background: white;
+
+    color: var(--ink);
+
+    outline: none;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+.field input::placeholder {
+    color: #aaa9a1;
+}
+
+.field input:hover {
+    border-color: #c9c5ba;
+}
+
+.field input:focus {
+    border-color: #aaa69b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(32, 35, 31, 0.06);
+
+    background: #fffefa;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    min-height: 18px;
+
+    margin:
+        7px 0 5px;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.message.error {
+    color: var(--danger);
+}
+
+.message.success {
+    color: var(--success);
+}
+
+
+/* =========================
+   PRIMARY BUTTON
+========================= */
+
+.auth-button {
+    width: 100%;
+
+    margin-top: 9px;
+
+    padding:
+        13px 16px;
+
+    border-radius: 11px;
+
+    border: 0;
+
+    background: var(--ink);
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
+
+.auth-button:hover {
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.auth-button:active {
+    transform:
+        translateY(0);
+}
+
+.auth-button:disabled {
+    cursor: wait;
+
+    opacity: 0.65;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+.button-arrow {
+    font-size: 16px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.18s ease;
+}
+
+.auth-button:hover .button-arrow {
+    transform:
+        translateX(3px);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.auth-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 23px;
+    padding-top: 20px;
+
+    border-top:
+        1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+.auth-footer a {
+    color: var(--ink);
+
+    font-weight: 800;
+
+    text-decoration:
+        underline;
+
+    text-decoration-color:
+        var(--accent);
+
+    text-decoration-thickness: 3px;
+
+    text-underline-offset: 2px;
+
+    transition:
+        color 0.15s ease;
+}
+
+.auth-footer a:hover {
+    color: #4b4e48;
+}
+
+
+/* =========================
+   BOTTOM BRANDING
+========================= */
+
+.auth-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 19px;
+
+    color: #92938b;
+
+    font-size: 9px;
+
+    letter-spacing: 0.2px;
+}
+
+.auth-bottom span:first-child {
+    color: var(--ink);
+
+    font-weight: 800;
+}
+
+
+/* =========================
+   SUBTLE ACCENT
+========================= */
+
+.auth-card::before {
+    content: "";
+
+    display: block;
+
+    width: 32px;
+    height: 4px;
+
+    margin-bottom: 25px;
+
+    border-radius: 20px;
+
+    background: var(--accent);
+}
+
+
+/* =========================
+   REGISTER — SLIGHTLY
+   MORE COMPACT
+========================= */
+
+#registerForm .field {
+    margin: 13px 0;
+}
+
+#registerForm .auth-button {
+    margin-top: 12px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 560px) {
+
+    body {
+        padding:
+            25px 17px;
+    }
+
+    .auth-card {
+        padding:
+            26px 21px;
+
+        border-radius: 18px;
+    }
+
+    .auth-header h2 {
+        font-size: 31px;
+
+        letter-spacing: -1.6px;
+    }
+
+    .auth-brand {
+        margin-bottom: 20px;
+    }
+
+    .auth-bottom {
+        display: none;
+    }
+}
+
+
+@media (max-height: 700px) {
+
+    body {
+        align-items: flex-start;
+
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+}
+/* =========================================================
+   FLOWFORGE AUTH — UI POLISH LAYER
+   ========================================================= */
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255,255,255,.95), transparent 27%),
+        radial-gradient(circle at 86% 82%, rgba(225,220,208,.55), transparent 30%),
+        var(--bg);
+}
+
+body::before {
+    content: "FLOWFORGE";
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-7deg);
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: clamp(80px, 17vw, 240px);
+    font-weight: 700;
+    letter-spacing: -.08em;
+    color: rgba(32,35,31,.025);
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(32,35,31,.12) .55px, transparent .55px);
+    background-size: 18px 18px;
+    opacity: .24;
+    mask-image: radial-gradient(circle at center, black, transparent 68%);
+}
+
+.auth-shell { z-index: 1; }
+.auth-brand { margin-bottom: 20px; }
+.brand-mark { box-shadow: 0 10px 26px rgba(0,0,0,.13); transition: transform .2s ease; }
+.auth-brand:hover .brand-mark { transform: rotate(-4deg) scale(1.04); }
+
+.auth-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 26px;
+    padding: 36px;
+    background: rgba(255,253,248,.88);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 28px 80px rgba(32,35,31,.10), 0 4px 16px rgba(32,35,31,.045);
+}
+
+.auth-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ink) 0 38%, var(--accent) 38% 68%, #9eb976 68% 100%);
+}
+
+.auth-header h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 1.02;
+    letter-spacing: -1.7px;
+}
+
+.field input { height: 49px; border-radius: 12px; background: rgba(255,255,255,.82); }
+.field input:focus { border-color: #979389; box-shadow: 0 0 0 4px rgba(32,35,31,.055); }
+
+.auth-button {
+    min-height: 49px;
+    border-radius: 12px;
+    box-shadow: 0 9px 24px rgba(32,35,31,.16);
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.auth-button:hover { transform: translateY(-2px); box-shadow: 0 13px 30px rgba(32,35,31,.22); }
+.auth-button:active { transform: translateY(0) scale(.99); }
+.button-arrow { transition: transform .18s ease; }
+.auth-button:hover .button-arrow { transform: translateX(4px); }
+.auth-footer { padding-top: 20px; }
+.auth-bottom { opacity: .75; }
+
+@media (max-width: 520px) {
+    body { padding: 24px 14px; }
+    .auth-card { padding: 28px 22px; border-radius: 21px; }
+    .auth-header h2 { font-size: 33px; }
+}
